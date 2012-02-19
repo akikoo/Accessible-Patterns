@@ -1,0 +1,36 @@
+/**
+ *
+ * Styles for jQuery accessible tooltip plugin
+ * 
+ * Author: Aki Karkkainen, www.akikoo.org
+ * https://github.com/akikoo/Accessible-Patterns
+ * Only giving classes here - you do the styling!
+ * 
+ * Licensed under the MIT license
+ * 
+ */
+
+
+/*Tooltip element that triggers the tooltip, usually a link or form input element*/
+.tip { 
+	cursor: help;
+	border-bottom: 1px dotted #333;	
+	text-decoration: none;
+}
+
+/*Tooltip container where the text is inserted*/
+.tooltip { 
+	position: absolute;
+	z-index: 1;	
+	color: #000;
+	background: #eee;
+	padding: 5px;
+	margin: 0;
+	border: 1px solid #ccc;
+	max-width: 300px;
+}
+
+/*Tooltip container, hidden state*/
+.tooltipHidden { 
+	display: none; 
+}
