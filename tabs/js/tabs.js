@@ -18,6 +18,7 @@
  * https://github.com/filamentgroup/Accessible-jQuery-Tabs
  * http://test.cita.illinois.edu/aria/tabpanel/tabpanel1.php
  * http://hanshillen.github.com/jqtest/#goto_tabs
+ * http://dev.aol.com/dhtml_style_guide
  * 
  * Licensed under the MIT license
  * 
@@ -107,6 +108,7 @@
 			'aria-hidden': 'false'
 		}).show();
 
+
 		//Generic function to handle tab change 
 		function selectTab($tab) {
 
@@ -180,7 +182,7 @@
 				case down:
 					e.preventDefault();
 					if ($(this).parent().next().length !== 0) {
-						$tab = $(this).parent().next().find(' > a');
+						$tab = $(this).parent().next().find('> a');
 					} else {
 						$tab = $tabList.find('li:first > a');
 					}

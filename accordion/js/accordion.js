@@ -16,6 +16,7 @@
  * CREDITS:
  * https://github.com/filamentgroup/jQuery-Collapsible-Content
  * http://test.cita.illinois.edu/aria/tabpanel/tabpanel2.php
+ * http://dev.aol.com/dhtml_style_guide
  * 
  * Licensed under the MIT license
  * 
@@ -53,7 +54,7 @@
 		var accContainerID		= opts.accContainerClass + (count + 1),	//unique ID for each accordion container
 			$tabHeading			= $obj.find('.' + opts.tabHeadingClass),//accordion heading
 			$tabPanel			= $obj.find('.' + opts.panelClass),		//accordion panel
-			tabHeadingNum		= $tabHeading.length,					//Number of headings in each accordion widget
+			tabHeadingNum		= $tabHeading.length,					//number of headings in each accordion widget
 			tabID				= accContainerID + opts.tabIDprefix,	//unique ID for each accordion heading
 			panelID				= accContainerID + opts.panelIDprefix,	//unique ID for each accordion panel
 			i;															//counter for assigning unique IDs and ARIA attributes 
@@ -93,7 +94,7 @@
 
 		}
 
-		//set state for the first accordion heading anchor
+		//set tabindex for the first accordion heading anchor
 		$obj.find('.' + opts.tabHeadingClass + ':first').find('> a').attr({
 			'tabindex': '0'
 		});
@@ -104,6 +105,7 @@
 
 		//Generic function to handle panel hiding 
 		function collapse(anchor) {
+			//handle heading status change
 			anchor
 				.attr({
 					'aria-selected': 'false',
@@ -113,7 +115,7 @@
 				.addClass(opts.collapsedClass)
 				.find('.' + opts.statusClass).text(opts.showText);
 
-			//hide previously selected tab panel
+			//hide tab panel
 			anchor
 				.parent('.' + opts.tabHeadingClass)
 				.next('.' + opts.panelClass)
@@ -126,6 +128,7 @@
 
 		//Generic function to handle panel showing 
 		function expand(anchor) {
+			//handle heading status change			
 			anchor
 				.attr({
 					'aria-selected': 'true',
@@ -135,8 +138,7 @@
 				.removeClass(opts.collapsedClass)
 				.find('.' + opts.statusClass).text(opts.hideText);
 
-			//change state of previously selected tab list anchor
-			//show newly selected tab panel
+			//show tab panel
 			anchor
 				.parent('.' + opts.tabHeadingClass)
 				.next('.' + opts.panelClass)
@@ -150,18 +152,19 @@
 		//Generic function to handle focus
 		function handleFocus($currentTab, $newTab) {
 
-			//change state of previously selected tab list anchor
+			//change state of previously active accordion heading control
 			$currentTab.attr({
 				'tabindex': '-1'
 			});
 
+			//set focus to the new accordion heading control 
 			$newTab.attr({
 				'tabindex': '0'
 			}).focus();
 
 		}
 
-		//Attach event listeners		
+		//Attach event listeners
 
 		//set the click event for each accordion heading link
 		$tabHeading.on('click', 'a', function (e) {
@@ -173,10 +176,9 @@
 
 				//prevent default action
 				return false;
-
 		})
 
-		//set keydown events on tab list anchors for navigating tabs
+		//set keydown events on accordion heading anchors for navigating the accordion
 		.on('keydown', 'a', function (e) {
 
 			// Define values for keycodes
@@ -238,7 +240,6 @@
 		collapsedClass: 'accHeadingCollapsed',
 		panelIDprefix: '-p',
 		panelClass: 'accPanel',
-		selClass: 'selected',
 		rtl: $('html').attr('dir') === 'rtl' ? true : false,
 		hideText: 'Hide',
 		showText: 'Show'
