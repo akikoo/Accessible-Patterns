@@ -1,0 +1,65 @@
+/**
+ *
+ * Styles for jQuery accessible tabs plugin
+ * 
+ * Author: Aki Karkkainen, www.akikoo.org
+ * Only giving classes here - you do the styling!
+ * 
+ * Licensed under the MIT license
+ * 
+ */
+
+ 
+/*Tabs container
+------------------------------------------------------------------------------*/
+.tabs {
+	
+}
+
+
+/*Tab list
+------------------------------------------------------------------------------*/
+.tabList {
+
+}
+
+
+/*Tab list items
+------------------------------------------------------------------------------*/
+.tabList li {
+
+}
+
+.tabList .selected {
+	
+}
+
+
+/*Tab list anchors
+------------------------------------------------------------------------------*/
+.tabList li a {
+
+}
+
+.tabList li a:hover, 
+.tabList li a:focus, 
+.tabList li a:active {
+	border: 1px dotted #ccc;
+}
+
+.tabList .selected a {
+
+}
+
+.tabList .selected a:hover, 
+.tabList .selected a:focus, 
+.tabList .selected a:active {
+
+}
+
+
+/*Tab panels
+------------------------------------------------------------------------------*/
+.tabPanel {
+
+}

@@ -1,0 +1,77 @@
+/**
+ *
+ * Styles for jQuery accessible accordion plugin
+ * 
+ * Author: Aki Karkkainen, www.akikoo.org
+ * Only giving classes here - you do the styling!
+ * 
+ * Licensed under the MIT license
+ * 
+ */
+
+ 
+/*Accordion container
+------------------------------------------------------------------------------*/
+.accordion {
+	
+}
+
+
+/*Accordion heading
+------------------------------------------------------------------------------*/
+/*expanded*/
+.accHeading {
+	
+}
+
+/*collapsed*/
+.accHeading-collapsed {
+	
+}
+
+
+/*Accordion heading anchors
+------------------------------------------------------------------------------*/
+/*expanded*/
+.accHeading a {
+	
+}
+
+/*expanded active*/
+.accHeading a:hover, 
+.accHeading a:focus, 
+.accHeading a:active {
+	
+}
+
+/*collapsed*/
+.accHeading-collapsed a {
+	
+}
+
+/*collapsed active*/
+.accHeading-collapsed a:hover, 
+.accHeading-collapsed a:focus, 
+.accHeading-collapsed a:active {
+
+}
+
+
+/*Accordion heading status element
+------------------------------------------------------------------------------*/
+.accStatus {
+	left: -999em;
+    position: absolute;	
+}
+
+
+/*Accordion panels
+------------------------------------------------------------------------------*/
+.accPanel {
+	
+}
+
+.accPanel p {
+	margin: 0;
+	padding: 0;
+}

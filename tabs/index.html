@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<title>jQuery accessible tabs plugin</title>
+	<meta charset="utf-8" />
+
+	<style>
+		/*footer*/
+		[role="contentinfo"] {
+			position: absolute;
+			bottom: 0;
+			left: 0; 
+			width: 98%;
+			text-align: center;
+			padding: 1%
+		}
+		/*separator*/
+		hr {
+			display: block; 
+			margin: 30px 0; 
+			border: none; 
+			height: 1px; 
+			background: #ccc;
+		}		
+	</style>
+
+	<link rel="stylesheet" href="css/tabs.css">
+
+</head>
+<body>
+
+	<h1>Accessible jQuery tabs</h1>
+
+	<div class="tabs">
+		<ul class="tabList">
+			<li><a href="#p1-1">First Tab</a></li>
+			<li><a href="#p1-2">Second Tab</a></li>
+			<li><a href="#p1-3">Third Tab</a></li>
+		</ul>
+
+		<div class="tabPanel" id="p1-1">
+			<h2>First Tab's Main Heading</h2>
+			<p>Text with <a href="#">a link</a></p>
+		</div>
+
+		<div class="tabPanel" id="p1-2">
+			<h2>Second Tab's Main Heading</h2>
+			<p>Text with <a href="#">a second link</a></p>
+		</div>
+
+		<div class="tabPanel" id="p1-3">
+			<h2>Third Tab's Main Heading</h2>
+			<p>Text with <a href="#">a third link</a></p>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="tabs">
+		<ul class="tabList">
+			<li><a href="#p2-1">First Tab</a></li>
+			<li><a href="#p2-2">Second Tab</a></li>
+			<li><a href="#p2-3">Third Tab</a></li>
+		</ul>
+
+		<div class="tabPanel" id="p2-1">
+			<h2>First Tab's Main Heading</h2>
+			<p>Text with <a href="#">a link</a></p>
+		</div>
+
+		<div class="tabPanel" id="p2-2">
+			<h2>Second Tab's Main Heading</h2>
+			<p>Text with <a href="#">a second link</a></p>
+		</div>
+
+		<div class="tabPanel" id="p2-3">
+			<h2>Third Tab's Main Heading</h2>
+			<p>Text with <a href="#">a third link</a></p>
+		</div>
+	</div>
+
+	<footer role="contentinfo">Aki Karkkainen</footer>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="js/tabs.js"></script>
+	<script>
+		//Attach the plugin
+		$('.tabs').tabs();
+	</script>
+</body>
+</html>
