@@ -3,7 +3,9 @@
  * jQuery accessible accordion plugin
  * 
  * Main features:
+ * Keyboard support with arrow keys
  * ARIA roles and states 
+ * RTL support
  * Multiple accordion instances on a page
  * 
  * Call it like so: $('.myelm').accordion();
