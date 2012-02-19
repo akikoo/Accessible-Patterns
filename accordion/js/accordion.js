@@ -9,6 +9,7 @@
  * Call it like so: $('.myelm').accordion();
  * 
  * Author: Aki Karkkainen, www.akikoo.org
+ * https://github.com/akikoo/Accessible-Patterns
  * 
  * CREDITS:
  * https://github.com/filamentgroup/jQuery-Collapsible-Content

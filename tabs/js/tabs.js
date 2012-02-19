@@ -11,6 +11,7 @@
  * Call it like so: $('.myelm').tabs();
  * 
  * Author: Aki Karkkainen, www.akikoo.org
+ * https://github.com/akikoo/Accessible-Patterns
  * 
  * CREDITS:
  * http://www.alistapart.com/articles/aria-and-progressive-enhancement/
