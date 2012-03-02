@@ -164,10 +164,12 @@
 
 		}
 
-		//Attach event listeners
 
-		//set the click event for each accordion heading link
-		$tabHeading.on('click', 'a', function (e) {
+		//Attach event listeners
+		$tabHeading.on({
+
+			//set the click event for each accordion heading link
+			click: function (e) {
 				if ($(this).parent().is('.' + opts.collapsedClass)) {
 					expand($(this));
 				} else {
@@ -176,58 +178,58 @@
 
 				//prevent default action
 				return false;
-		})
+			},
 
-		//set keydown events on accordion heading anchors for navigating the accordion
-		.on('keydown', 'a', function (e) {
+			//set keydown events on accordion heading anchors for navigating the accordion
+			keydown: function (e) {
 
-			// Define values for keycodes
-			var prev	= opts.rtl ? 39 : 37,	// 37: left arrow
-				next	= opts.rtl ? 37 : 39,	// 39: right arrow
-				up		= 38,					// 38: up arrow
-				down	= 40,					// 40: down arrow
-				home	= 36,					// 36: home key
-				end		= 35,					// 35: end key				
-				$tab	= null;					// current tab anchor
+				// Define values for keycodes
+				var prev	= opts.rtl ? 39 : 37,	// 37: left arrow
+					next	= opts.rtl ? 37 : 39,	// 39: right arrow
+					up		= 38,					// 38: up arrow
+					down	= 40,					// 40: down arrow
+					home	= 36,					// 36: home key
+					end		= 35,					// 35: end key				
+					$tab	= null;					// current tab anchor
 
-			switch (e.which) {
+				switch (e.which) {
 
-				case prev:
-				case up:
-					e.preventDefault();
-					if ($(this).parent('.' + opts.tabHeadingClass).prevAll('.' + opts.tabHeadingClass).length !== 0) {
-						$tab = $(this).parent('.' + opts.tabHeadingClass).prevAll('.' + opts.tabHeadingClass + ':first').find('> a');
-					} else {
-						$tab = $obj.find('.' + opts.tabHeadingClass + ':last').find('> a');
-					}
-					handleFocus($(this), $tab);
-				break;
+					case prev:
+					case up:
+						e.preventDefault();
+						if ($(this).parent('.' + opts.tabHeadingClass).prevAll('.' + opts.tabHeadingClass).length !== 0) {
+							$tab = $(this).parent('.' + opts.tabHeadingClass).prevAll('.' + opts.tabHeadingClass + ':first').find('> a');
+						} else {
+							$tab = $obj.find('.' + opts.tabHeadingClass + ':last').find('> a');
+						}
+						handleFocus($(this), $tab);
+					break;
 
-				case next:
-				case down:
-					e.preventDefault();
-					if ($(this).parent('.' + opts.tabHeadingClass).nextAll('.' + opts.tabHeadingClass).length !== 0) {
-						$tab = $(this).parent('.' + opts.tabHeadingClass).nextAll('.' + opts.tabHeadingClass + ':first').find('> a');
-					} else {
+					case next:
+					case down:
+						e.preventDefault();
+						if ($(this).parent('.' + opts.tabHeadingClass).nextAll('.' + opts.tabHeadingClass).length !== 0) {
+							$tab = $(this).parent('.' + opts.tabHeadingClass).nextAll('.' + opts.tabHeadingClass + ':first').find('> a');
+						} else {
+							$tab = $obj.find('.' + opts.tabHeadingClass + ':first').find('> a');
+						}
+						handleFocus($(this), $tab);
+					break;
+
+					case home:
+						e.preventDefault();
 						$tab = $obj.find('.' + opts.tabHeadingClass + ':first').find('> a');
-					}
-					handleFocus($(this), $tab);
-				break;
+						handleFocus($(this), $tab);
+						break;
 
-				case home:
-					e.preventDefault();
-					$tab = $obj.find('.' + opts.tabHeadingClass + ':first').find('> a');
-					handleFocus($(this), $tab);
-					break;
-
-				case end:
-					e.preventDefault();
-					$tab = $obj.find('.' + opts.tabHeadingClass + ':last').find('> a');
-					handleFocus($(this), $tab);
-					break;
-
+					case end:
+						e.preventDefault();
+						$tab = $obj.find('.' + opts.tabHeadingClass + ':last').find('> a');
+						handleFocus($(this), $tab);
+						break;
+				}
 			}
-		});
+		}, 'a');
 	}
 
 

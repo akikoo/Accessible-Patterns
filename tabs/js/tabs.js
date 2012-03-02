@@ -139,72 +139,73 @@
 		}
 
 
-		//Attach event listeners		
+		//Attach event listeners
+		$tabList.on({
+		
+			//set the click event for each tab link		
+			click: function (e) {
 
-		//set the click event for each tab link
-		$tabList.on('click', 'li > a', function (e) {
+				//Switch tabs
+				selectTab($(this));
 
-			//Switch tabs
-			selectTab($(this));
+				//prevent default action
+				e.preventDefault();
+				
+			},
 
-			//prevent default action
-			e.preventDefault();
+			//set keydown events on tab list anchors for navigating tabs
+			keydown: function (e) {
 
-		})
+				// Define values for keycodes
+				var prev	= opts.rtl ? 39 : 37,	// 37: left arrow
+					next	= opts.rtl ? 37 : 39,	// 39: right arrow
+					up		= 38,					// 38: up arrow
+					down	= 40,					// 40: down arrow
+					home	= 36,					// 36: home key
+					end		= 35,					// 35: end key
+					$tab	= null;					// current tab anchor
 
-		//set keydown events on tab list anchors for navigating tabs
-		.on('keydown', 'li > a', function (e) {
+				switch (e.which) {
 
-			// Define values for keycodes
-			var prev	= opts.rtl ? 39 : 37,	// 37: left arrow
-				next	= opts.rtl ? 37 : 39,	// 39: right arrow
-				up		= 38,					// 38: up arrow
-				down	= 40,					// 40: down arrow
-				home	= 36,					// 36: home key
-				end		= 35,					// 35: end key
-				$tab	= null;					// current tab anchor
+					case prev:
+					case up:
+						e.preventDefault();
+						if ($(this).parent().prev().length !== 0) {
+							$tab = $(this).parent().prev().find('> a');
+						} else {
+							$tab = $tabList.find('li:last > a');
+						}
+						//Switch tabs
+						selectTab($tab);
+						break;
 
-			switch (e.which) {
+					case next:
+					case down:
+						e.preventDefault();
+						if ($(this).parent().next().length !== 0) {
+							$tab = $(this).parent().next().find('> a');
+						} else {
+							$tab = $tabList.find('li:first > a');
+						}
+						//Switch tabs
+						selectTab($tab);
+						break;
 
-				case prev:
-				case up:
-					e.preventDefault();
-					if ($(this).parent().prev().length !== 0) {
-						$tab = $(this).parent().prev().find('> a');
-					} else {
-						$tab = $tabList.find('li:last > a');
-					}
-					//Switch tabs
-					selectTab($tab);
-					break;
-
-				case next:
-				case down:
-					e.preventDefault();
-					if ($(this).parent().next().length !== 0) {
-						$tab = $(this).parent().next().find('> a');
-					} else {
+					case home:
+						e.preventDefault();
 						$tab = $tabList.find('li:first > a');
-					}
-					//Switch tabs
-					selectTab($tab);
-					break;
+						//Switch tabs
+						selectTab($tab);
+						break;
 
-				case home:
-					e.preventDefault();
-					$tab = $tabList.find('li:first > a');
-					//Switch tabs
-					selectTab($tab);
-					break;
-
-				case end:
-					$tab = $tabList.find('li:last > a');
-					//Switch tabs
-					selectTab($tab);
-					break;
+					case end:
+						$tab = $tabList.find('li:last > a');
+						//Switch tabs
+						selectTab($tab);
+						break;
+				}
 			}
-		});
-
+		}, 'li > a');
 	}
 
 
