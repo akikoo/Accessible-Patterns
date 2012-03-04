@@ -31,17 +31,19 @@
 
 	<h1>Accessible jQuery tooltip</h1>
 
-	<p>The <a href="#" class="tip" title="Hello world in a title attribute!">tooltip</a> content is taken from the title attribute in this link.</p>
-	<p>In <a href="#myTarget" class="tip">this tooltip</a>, the content is retrieved from elsewhere on the page.</p>
+	<div class="content">
+		<p>The <a href="#" class="tip" title="Hello world in a title attribute!">tooltip</a> content is taken from the title attribute in this link.</p>
+		<p>In <a href="#myTarget" class="tip">this tooltip</a>, the content is retrieved from elsewhere on the page.</p>
 
-	<p>
-		<label for="formId">Enter something:</label>
-		<input type="text" id="formId" class="tip" title="help text in input element" name="something">
-	</p>
+		<p>
+			<label for="formId">Enter something:</label>
+			<input type="text" id="formId" class="tip" title="help text in input element" name="something">
+		</p>
 
-	<div id="myTarget">
-		<h2>A heading in a tooltip</h2>
-		<p>And a paragraph.</p>
+		<div id="myTarget">
+			<h2>A heading in a tooltip</h2>
+			<p>And a paragraph.</p>
+		</div>
 	</div>
 
 	<footer role="contentinfo">

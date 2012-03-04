@@ -76,65 +76,93 @@
 				tooltip.text($obj.attr('title'));
 			}
 
-			//apply attrs and events to tooltipped element			
+			//apply attrs and events to tooltipped element
 			$obj
-				.removeAttr('title')			//remove redundant title attr
-				.attr('aria-describedby', ttID) //associate tooltip with element for screenreaders
-				.mouseover(function (e) {
-					var top = e.pageY - tooltip.outerHeight(),
-						left = opts.rtl ? e.pageX - tooltip.outerWidth() : e.pageX + opts.pageXOffsetMouse;
-					tooltip
-					.appendTo('body')
-					.removeClass(opts.hiddenClass)
-					.attr('aria-hidden', false)
-					.css({
-						top: top,
-						left: left
-					});
+				.removeAttr('title')				//remove redundant title attr
+				.attr('aria-describedby', ttID);	//associate tooltip with element for screenreaders
 
-				})
+			//events
+			$(opts.wrapper).on({
 
-				.focusin(function (e) {
-					var top = tipCoordinates.top - tooltip.outerHeight() - opts.pageYOffsetKeyboard,
-						left = opts.rtl ? tipCoordinates.left - tooltip.outerWidth() - opts.pageXOffsetKeyboard : tipCoordinates.left + tipWidth + opts.pageXOffsetKeyboard;
-					tooltip
-					.appendTo('body')
-					.removeClass(opts.hiddenClass)
-					.attr('aria-hidden', false)
-					.css({
-						top: top,
-						left: left
-					});
-				})
+				click: function (e) {
+					if ($(e.target).is($obj)) {
+						e.preventDefault();
+					}
+				},
 
-				.mousemove(function (e) {
-					var top = e.pageY - tooltip.outerHeight(),
-						left = opts.rtl ? e.pageX - tooltip.outerWidth() - opts.pageXOffsetMouse : e.pageX + opts.pageXOffsetMouse;
-					tooltip
-					.css({
-						top: top,
-						left: left
-					});
-				})
+				mouseover: function (e) {
 
-				.mouseout(function () {
-					tooltip.addClass(opts.hiddenClass).attr('aria-hidden', true);
-				})
+					if ($(e.target).is($obj)) {
+						var top = e.pageY - tooltip.outerHeight(),
+							left = opts.rtl ? e.pageX - tooltip.outerWidth() : e.pageX + opts.pageXOffsetMouse;
+						tooltip
+						.appendTo('body')
+						.removeClass(opts.hiddenClass)
+						.attr('aria-hidden', false)
+						.css({
+							top: top,
+							left: left
+						});
+					}
+				},
 
-				.focusout(function () {
-					tooltip.addClass(opts.hiddenClass).attr('aria-hidden', true);
-				})
+				focusin: function (e) {
+
+					if ($(e.target).is($obj)) {
+						var top = tipCoordinates.top - tooltip.outerHeight() - opts.pageYOffsetKeyboard,
+							left = opts.rtl ? tipCoordinates.left - tooltip.outerWidth() - opts.pageXOffsetKeyboard : tipCoordinates.left + tipWidth + opts.pageXOffsetKeyboard;
+						tooltip
+						.appendTo('body')
+						.removeClass(opts.hiddenClass)
+						.attr('aria-hidden', false)
+						.css({
+							top: top,
+							left: left
+						});
+					}
+				},
+
+				mousemove: function (e) {
+
+					if ($(e.target).is($obj)) {
+						var top = e.pageY - tooltip.outerHeight(),
+							left = opts.rtl ? e.pageX - tooltip.outerWidth() - opts.pageXOffsetMouse : e.pageX + opts.pageXOffsetMouse;
+						tooltip
+						.css({
+							top: top,
+							left: left
+						});
+					}
+				},
+
+				mouseout: function (e) {
+
+					if ($(e.target).is($obj)) {
+						tooltip.addClass(opts.hiddenClass).attr('aria-hidden', true);
+					}
+				},
+
+				focusout: function (e) {
+
+					if ($(e.target).is($obj)) {
+						tooltip.addClass(opts.hiddenClass).attr('aria-hidden', true);
+					}
+				},
 
 				//close tooltip on esc key press
-				.keydown(function (e) {
+				keydown: function (e) {
+
 					var esc	= 27;	// 27: esc key
 
-					switch (e.which) {
-						case esc:
-							tooltip.addClass(opts.hiddenClass).attr('aria-hidden', true);
-						break;
+					if ($(e.target).is($obj)) {
+						switch (e.which) {
+							case esc:
+								tooltip.addClass(opts.hiddenClass).attr('aria-hidden', true);
+							break;
+						}
 					}
-				});
+				}
+			}, '.' + opts.tipClass); //filter the descendants of the elements that trigger the event
 
 			//if the title attribute is in input element, 
 			//find an associated label and set its describedby attr as well
@@ -152,9 +180,10 @@
 
 	// Plugin defaults
 	$.fn.tooltip.defaults = {
-		tipClass			: 'tip',
-		tipContainerClass	: 'tooltip',
-		hiddenClass			: 'tooltipHidden',
+		wrapper				: '.content',	//parent element where the event handlers are bound
+		tipClass			: 'tip',		//element that triggers tooltip; also a selector to filter the descendants of the elements that trigger the events
+		tipContainerClass	: 'tooltip',	//element where the tooltip content is written
+		hiddenClass			: 'tooltipHidden', 
 		rtl					: $('html').attr('dir') === 'rtl' ? true : false,
 		pageXOffsetMouse	: 20,	//vertical offset for mouse
 		pageYOffsetMouse	: 35,	//horizontal offset for mouse
