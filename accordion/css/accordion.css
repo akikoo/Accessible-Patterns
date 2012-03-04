@@ -69,10 +69,5 @@
 /*Accordion panels
 ------------------------------------------------------------------------------*/
 .accPanel {
-	
-}
-
-.accPanel p {
-	margin: 0;
-	padding: 0;
+	overflow: hidden; /*fix for height issue when sliding up and down*/
 }
