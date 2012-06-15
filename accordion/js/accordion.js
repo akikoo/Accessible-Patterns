@@ -25,226 +25,228 @@
 
 ;(function (window, $, undefined) {
 
-	'use strict';
+    'use strict';
 
-	// Plugin definition	
-	$.fn.accordion = function (options) {
+    // Plugin definition	
+    $.fn.accordion = function (options) {
 
-		// Extend default options with those provided
-		var settings = $.extend({}, $.fn.accordion.defaults, options);
+        // Extend default options with those provided
+        var settings = $.extend({}, $.fn.accordion.defaults, options);
 
-		return this.each(function (i) {
+        return this.each(function (i) {
 
-			// Assign the current accordion container to a variable
-			var $this = $(this);
+            // Assign the current accordion container to a variable
+            var $this = $(this),
 
-			// Merge in the metadata elements (Metadata plugin) for this specific node
-			var o = $.metadata ? $.extend({}, settings, $.metadata.get(this)) : settings;
+                // Merge in the metadata elements (Metadata plugin) for this specific node
+                o = $.metadata ? $.extend({}, settings, $.metadata.get(this)) : settings;
 
-			// Kick it off
-			initAccordion($this, o, i);
+            // Kick it off
+            initAccordion($this, o, i);
 
-		});
+        });
 
-	};
-
-
-	function initAccordion($obj, opts, count) {
-
-		var accContainerID		= opts.accContainerClass + (count + 1),	//unique ID for each accordion container
-			$tabHeading			= $obj.find('.' + opts.tabHeadingClass),//accordion heading
-			$tabPanel			= $obj.find('.' + opts.panelClass),		//accordion panel
-			tabHeadingNum		= $tabHeading.length,					//number of headings in each accordion widget
-			tabID				= accContainerID + opts.tabIDprefix,	//unique ID for each accordion heading
-			panelID				= accContainerID + opts.panelIDprefix,	//unique ID for each accordion panel
-			i;															//counter for assigning unique IDs and ARIA attributes 
-
-		//set unique ID for each accordion container
-		$obj.attr({
-			'id': accContainerID,
-			'aria-multiselectable': true
-		});
-
-		//generate an anchor and span inside each header, to track state 
-		$tabHeading
-			.prepend('<span class="' + opts.statusClass + '"></span>')
-			.wrapInner('<a href="#"></a>');
-
-		//Generate IDs and ARIA attributes for tabs and panels
-		for (i = 1; i <= tabHeadingNum; i += 1) {
-
-			//For each accordion control, set ID, tabindex and aria attributes
-			//Also set presentation role for each accordion heading control
-			$tabHeading.find('a').eq(i - 1).attr({
-				'id': tabID + i,
-				'role': 'tab',
-				'aria-selected': 'false',
-				'aria-controls': panelID + i,
-				'href': '#' + panelID + i,
-				'tabindex': '-1'
-			}).parent().attr('role', 'presentation');
-
-			//for each individual accordion panel, set ID and aria role attributes, and hide it
-			$tabPanel.eq(i - 1).attr({
-				'id': panelID + i,
-				'aria-labelledby': tabID + i,
-				'role': 'tabpanel',
-				'aria-hidden': 'true'
-			}).hide();
-
-		}
-
-		//set tabindex for the first accordion heading anchor
-		$obj.find('.' + opts.tabHeadingClass + ':first').find('> a').attr({
-			'tabindex': '0'
-		});
-
-		//set collapsed heading class
-		$obj.find('.' + opts.tabHeadingClass).addClass(opts.collapsedClass);
+    };
 
 
-		//Generic function to handle panel hiding 
-		function collapse(anchor) {
-			//handle heading status change
-			anchor
-				.attr({
-					'aria-selected': 'false',
-					'tabindex': '0'
-				})
-				.parent('.' + opts.tabHeadingClass)
-				.addClass(opts.collapsedClass)
-				.find('.' + opts.statusClass).text(opts.showText);
+    function initAccordion($obj, opts, count) {
 
-			//hide tab panel
-			anchor
-				.parent('.' + opts.tabHeadingClass)
-				.next('.' + opts.panelClass)
-				.attr({
-					'aria-hidden': true
-				})
-				.slideUp(100);
-		}
+        var accContainerID		= opts.accContainerClass + (count + 1),	//unique ID for each accordion container
+            $tabHeading			= $obj.find('.' + opts.tabHeadingClass),//accordion heading
+            $tabPanel			= $obj.find('.' + opts.panelClass),		//accordion panel
+            tabHeadingNum		= $tabHeading.length,					//number of headings in each accordion widget
+            tabID				= accContainerID + opts.tabIDprefix,	//unique ID for each accordion heading
+            panelID				= accContainerID + opts.panelIDprefix,	//unique ID for each accordion panel
+            i;															//counter for assigning unique IDs and ARIA attributes 
 
+        //set unique ID for each accordion container
+        $obj.attr({
+            'id': accContainerID,
+            'aria-multiselectable': true
+        });
 
-		//Generic function to handle panel showing 
-		function expand(anchor) {
-			//handle heading status change			
-			anchor
-				.attr({
-					'aria-selected': 'true',
-					'tabindex': '0'
-				})
-				.parent('.' + opts.tabHeadingClass)
-				.removeClass(opts.collapsedClass)
-				.find('.' + opts.statusClass).text(opts.hideText);
+        //generate an anchor and span inside each header, to track state 
+        $tabHeading
+            .prepend('<span class="' + opts.statusClass + '"></span>')
+            .wrapInner('<a href="#"></a>');
 
-			//show tab panel
-			anchor
-				.parent('.' + opts.tabHeadingClass)
-				.next('.' + opts.panelClass)
-				.attr({
-					'aria-hidden': false
-				})
-				.slideDown(100);
-		}
+        //Generate IDs and ARIA attributes for tabs and panels
+        for (i = 1; i <= tabHeadingNum; i += 1) {
 
+            //For each accordion control, set ID, tabindex and aria attributes
+            //Also set presentation role for each accordion heading control
+            $tabHeading.find('a').eq(i - 1).attr({
+                'id': tabID + i,
+                'role': 'tab',
+                'aria-selected': 'false',
+                'aria-controls': panelID + i,
+                'href': '#' + panelID + i,
+                'tabindex': '-1'
+            }).parent().attr('role', 'presentation');
 
-		//Generic function to handle focus
-		function handleFocus($currentTab, $newTab) {
+            //for each individual accordion panel, set ID and aria role attributes, and hide it
+            $tabPanel.eq(i - 1).attr({
+                'id': panelID + i,
+                'aria-labelledby': tabID + i,
+                'role': 'tabpanel',
+                'aria-hidden': 'true'
+            }).hide();
 
-			//change state of previously active accordion heading control
-			$currentTab.attr({
-				'tabindex': '-1'
-			});
+        }
 
-			//set focus to the new accordion heading control 
-			$newTab.attr({
-				'tabindex': '0'
-			}).focus();
+        //set tabindex for the first accordion heading anchor
+        $obj.find('.' + opts.tabHeadingClass + ':first').find('> a').attr({
+            'tabindex': '0'
+        });
 
-		}
+        //set collapsed heading class
+        $obj.find('.' + opts.tabHeadingClass).addClass(opts.collapsedClass);
 
 
-		//Attach event listeners
-		$tabHeading.on({
+        //Generic function to handle panel hiding 
+        function collapse(anchor) {
 
-			//set the click event for each accordion heading link
-			click: function (e) {
-				if ($(this).parent().is('.' + opts.collapsedClass)) {
-					expand($(this));
-				} else {
-					collapse($(this));
-				}
+            //handle heading status change
+            anchor
+                .attr({
+                    'aria-selected': 'false',
+                    'tabindex': '0'
+                })
+                .parent('.' + opts.tabHeadingClass)
+                .addClass(opts.collapsedClass)
+                .find('.' + opts.statusClass).text(opts.showText);
 
-				//prevent default action
-				return false;
-			},
-
-			//set keydown events on accordion heading anchors for navigating the accordion
-			keydown: function (e) {
-
-				// Define values for keycodes
-				var prev	= opts.rtl ? 39 : 37,	// 37: left arrow
-					next	= opts.rtl ? 37 : 39,	// 39: right arrow
-					up		= 38,					// 38: up arrow
-					down	= 40,					// 40: down arrow
-					home	= 36,					// 36: home key
-					end		= 35,					// 35: end key				
-					$tab	= null;					// current tab anchor
-
-				switch (e.which) {
-
-					case prev:
-					case up:
-						e.preventDefault();
-						if ($(this).parent('.' + opts.tabHeadingClass).prevAll('.' + opts.tabHeadingClass).length !== 0) {
-							$tab = $(this).parent('.' + opts.tabHeadingClass).prevAll('.' + opts.tabHeadingClass + ':first').find('> a');
-						} else {
-							$tab = $obj.find('.' + opts.tabHeadingClass + ':last').find('> a');
-						}
-						handleFocus($(this), $tab);
-					break;
-
-					case next:
-					case down:
-						e.preventDefault();
-						if ($(this).parent('.' + opts.tabHeadingClass).nextAll('.' + opts.tabHeadingClass).length !== 0) {
-							$tab = $(this).parent('.' + opts.tabHeadingClass).nextAll('.' + opts.tabHeadingClass + ':first').find('> a');
-						} else {
-							$tab = $obj.find('.' + opts.tabHeadingClass + ':first').find('> a');
-						}
-						handleFocus($(this), $tab);
-					break;
-
-					case home:
-						e.preventDefault();
-						$tab = $obj.find('.' + opts.tabHeadingClass + ':first').find('> a');
-						handleFocus($(this), $tab);
-						break;
-
-					case end:
-						e.preventDefault();
-						$tab = $obj.find('.' + opts.tabHeadingClass + ':last').find('> a');
-						handleFocus($(this), $tab);
-						break;
-				}
-			}
-		}, 'a');
-	}
+            //hide tab panel
+            anchor
+                .parent('.' + opts.tabHeadingClass)
+                .next('.' + opts.panelClass)
+                .attr({
+                    'aria-hidden': true
+                })
+                .slideUp(100);
+        }
 
 
-	// Plugin defaults
-	$.fn.accordion.defaults = {
-		accContainerClass: 'acc',
-		tabIDprefix: '-t',
-		statusClass: 'accStatus',
-		tabHeadingClass: 'accHeading',
-		collapsedClass: 'accHeadingCollapsed',
-		panelIDprefix: '-p',
-		panelClass: 'accPanel',
-		rtl: $('html').attr('dir') === 'rtl' ? true : false,
-		hideText: 'Hide',
-		showText: 'Show'
-	};
+        //Generic function to handle panel showing 
+        function expand(anchor) {
+
+            //handle heading status change			
+            anchor
+                .attr({
+                    'aria-selected': 'true',
+                    'tabindex': '0'
+                })
+                .parent('.' + opts.tabHeadingClass)
+                .removeClass(opts.collapsedClass)
+                .find('.' + opts.statusClass).text(opts.hideText);
+
+            //show tab panel
+            anchor
+                .parent('.' + opts.tabHeadingClass)
+                .next('.' + opts.panelClass)
+                .attr({
+                    'aria-hidden': false
+                })
+                .slideDown(100);
+        }
+
+
+        //Generic function to handle focus
+        function handleFocus($currentTab, $newTab) {
+
+            //change state of previously active accordion heading control
+            $currentTab.attr({
+                'tabindex': '-1'
+            });
+
+            //set focus to the new accordion heading control 
+            $newTab.attr({
+                'tabindex': '0'
+            }).focus();
+
+        }
+
+
+        //Attach event listeners
+        $tabHeading.on({
+
+            //set the click event for each accordion heading link
+            click: function (e) {
+                if ($(this).parent().is('.' + opts.collapsedClass)) {
+                    expand($(this));
+                } else {
+                    collapse($(this));
+                }
+
+                //prevent default action
+                return false;
+            },
+
+            //set keydown events on accordion heading anchors for navigating the accordion
+            keydown: function (e) {
+
+                // Define values for keycodes
+                var prev	= opts.rtl ? 39 : 37,	// 37: left arrow
+                    next	= opts.rtl ? 37 : 39,	// 39: right arrow
+                    up		= 38,					// 38: up arrow
+                    down	= 40,					// 40: down arrow
+                    home	= 36,					// 36: home key
+                    end		= 35,					// 35: end key				
+                    $tab	= null;					// current tab anchor
+
+                switch (e.which) {
+
+                case prev:
+                case up:
+                    e.preventDefault();
+                    if ($(this).parent('.' + opts.tabHeadingClass).prevAll('.' + opts.tabHeadingClass).length !== 0) {
+                        $tab = $(this).parent('.' + opts.tabHeadingClass).prevAll('.' + opts.tabHeadingClass + ':first').find('> a');
+                    } else {
+                        $tab = $obj.find('.' + opts.tabHeadingClass + ':last').find('> a');
+                    }
+                    handleFocus($(this), $tab);
+                    break;
+
+                case next:
+                case down:
+                    e.preventDefault();
+                    if ($(this).parent('.' + opts.tabHeadingClass).nextAll('.' + opts.tabHeadingClass).length !== 0) {
+                        $tab = $(this).parent('.' + opts.tabHeadingClass).nextAll('.' + opts.tabHeadingClass + ':first').find('> a');
+                    } else {
+                        $tab = $obj.find('.' + opts.tabHeadingClass + ':first').find('> a');
+                    }
+                    handleFocus($(this), $tab);
+                    break;
+
+                case home:
+                    e.preventDefault();
+                    $tab = $obj.find('.' + opts.tabHeadingClass + ':first').find('> a');
+                    handleFocus($(this), $tab);
+                    break;
+
+                case end:
+                    e.preventDefault();
+                    $tab = $obj.find('.' + opts.tabHeadingClass + ':last').find('> a');
+                    handleFocus($(this), $tab);
+                    break;
+                }
+            }
+        }, 'a');
+    }
+
+
+    // Plugin defaults
+    $.fn.accordion.defaults = {
+        accContainerClass: 'acc',
+        tabIDprefix: '-t',
+        statusClass: 'accStatus',
+        tabHeadingClass: 'accHeading',
+        collapsedClass: 'accHeadingCollapsed',
+        panelIDprefix: '-p',
+        panelClass: 'accPanel',
+        rtl: $('html').attr('dir') === 'rtl' ? true : false,
+        hideText: 'Hide',
+        showText: 'Show'
+    };
 
 }(window, jQuery));
