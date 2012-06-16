@@ -51,13 +51,13 @@
 
     function initAccordion($obj, opts, count) {
 
-        var accContainerID		= opts.accContainerClass + (count + 1),	//unique ID for each accordion container
-            $tabHeading			= $obj.find('.' + opts.tabHeadingClass),//accordion heading
-            $tabPanel			= $obj.find('.' + opts.panelClass),		//accordion panel
-            tabHeadingNum		= $tabHeading.length,					//number of headings in each accordion widget
-            tabID				= accContainerID + opts.tabIDprefix,	//unique ID for each accordion heading
-            panelID				= accContainerID + opts.panelIDprefix,	//unique ID for each accordion panel
-            i;															//counter for assigning unique IDs and ARIA attributes 
+        var accContainerID      = opts.accContainerClass + (count + 1), //unique ID for each accordion container
+            $tabHeading         = $obj.find('.' + opts.tabHeadingClass),//accordion heading
+            $tabPanel           = $obj.find('.' + opts.panelClass),     //accordion panel
+            tabHeadingNum       = $tabHeading.length,                   //number of headings in each accordion widget
+            tabID               = accContainerID + opts.tabIDprefix,    //unique ID for each accordion heading
+            panelID             = accContainerID + opts.panelIDprefix,  //unique ID for each accordion panel
+            i;                                                          //counter for assigning unique IDs and ARIA attributes 
 
         //set unique ID for each accordion container
         $obj.attr({
@@ -186,13 +186,13 @@
             keydown: function (e) {
 
                 // Define values for keycodes
-                var prev	= opts.rtl ? 39 : 37,	// 37: left arrow
-                    next	= opts.rtl ? 37 : 39,	// 39: right arrow
-                    up		= 38,					// 38: up arrow
-                    down	= 40,					// 40: down arrow
-                    home	= 36,					// 36: home key
-                    end		= 35,					// 35: end key				
-                    $tab	= null;					// current tab anchor
+                var prev    = opts.rtl ? 39 : 37,   // 37: left arrow
+                    next    = opts.rtl ? 37 : 39,   // 39: right arrow
+                    up      = 38,                   // 38: up arrow
+                    down    = 40,                   // 40: down arrow
+                    home    = 36,                   // 36: home key
+                    end     = 35,                   // 35: end key				
+                    $tab    = null;                 // current tab anchor
 
                 switch (e.which) {
 
@@ -237,16 +237,16 @@
 
     // Plugin defaults
     $.fn.accordion.defaults = {
-        accContainerClass: 'acc',
-        tabIDprefix: '-t',
-        statusClass: 'accStatus',
-        tabHeadingClass: 'accHeading',
-        collapsedClass: 'accHeadingCollapsed',
-        panelIDprefix: '-p',
-        panelClass: 'accPanel',
-        rtl: $('html').attr('dir') === 'rtl' ? true : false,
-        hideText: 'Hide',
-        showText: 'Show'
+        accContainerClass   : 'acc',
+        tabIDprefix         : '-t',
+        statusClass         : 'accStatus',
+        tabHeadingClass     : 'accHeading',
+        collapsedClass      : 'accHeadingCollapsed',
+        panelIDprefix       : '-p',
+        panelClass          : 'accPanel',
+        rtl                 : $('html').attr('dir') === 'rtl' ? true : false,
+        hideText            : 'Hide',
+        showText            : 'Show'
     };
 
 }(window, jQuery));

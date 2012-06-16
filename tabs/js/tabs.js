@@ -53,14 +53,14 @@
 
     function initTabs($obj, opts, count) {
 
-        var tabContainerID		= opts.tabContainerClass + (count + 1),	//unique ID for each tab container
-            $tabList			= $obj.find('.' + opts.tabListClass),	//tab list
-            $tabAnchor			= $tabList.find('li > a'),				//tab list anchor			
-            tabPanel			= $obj.find('.' + opts.panelClass),		//tab panel
-            tabPanelNum			= tabPanel.length,						//Number of panels in each tab widget
-            tabID				= tabContainerID + opts.tabIDprefix,	//unique ID for each tab
-            panelID				= tabContainerID + opts.panelIDprefix,	//unique ID for each panel
-            i;															//counter for assigning unique IDs and ARIA attributes
+        var tabContainerID      = opts.tabContainerClass + (count + 1), //unique ID for each tab container
+            $tabList            = $obj.find('.' + opts.tabListClass),   //tab list
+            $tabAnchor          = $tabList.find('li > a'),              //tab list anchor			
+            tabPanel            = $obj.find('.' + opts.panelClass),     //tab panel
+            tabPanelNum         = tabPanel.length,                      //Number of panels in each tab widget
+            tabID               = tabContainerID + opts.tabIDprefix,    //unique ID for each tab
+            panelID             = tabContainerID + opts.panelIDprefix,  //unique ID for each panel
+            i;                                                          //counter for assigning unique IDs and ARIA attributes
 
         //set unique ID for each tab container
         $obj.attr({
@@ -157,13 +157,13 @@
             keydown: function (e) {
 
                 // Define values for keycodes
-                var prev	= opts.rtl ? 39 : 37,	// 37: left arrow
-                    next	= opts.rtl ? 37 : 39,	// 39: right arrow
-                    up		= 38,					// 38: up arrow
-                    down	= 40,					// 40: down arrow
-                    home	= 36,					// 36: home key
-                    end		= 35,					// 35: end key
-                    $tab	= null;					// current tab anchor
+                var prev    = opts.rtl ? 39 : 37,   // 37: left arrow
+                    next    = opts.rtl ? 37 : 39,   // 39: right arrow
+                    up      = 38,                   // 38: up arrow
+                    down    = 40,                   // 40: down arrow
+                    home    = 36,                   // 36: home key
+                    end     = 35,                   // 35: end key
+                    $tab    = null;                 // current tab anchor
 
                 switch (e.which) {
 
@@ -211,13 +211,13 @@
 
     // Plugin defaults
     $.fn.tabs.defaults = {
-        tabContainerClass: 'tabs',
-        tabIDprefix: '-t',
-        tabListClass: 'tabList',
-        panelIDprefix: '-p',
-        panelClass: 'tabPanel',
-        selClass: 'selected',
-        rtl: $('html').attr('dir') === 'rtl' ? true : false
+        tabContainerClass:  'tabs',
+        tabIDprefix:        '-t',
+        tabListClass:       'tabList',
+        panelIDprefix:      '-p',
+        panelClass:         'tabPanel',
+        selClass:           'selected',
+        rtl:                $('html').attr('dir') === 'rtl' ? true : false
     };
 
 }(window, jQuery));

@@ -186,15 +186,15 @@
 
     // Plugin defaults
     $.fn.tooltip.defaults = {
-        wrapper				: '.content',	//parent element where the event handlers are bound
-        tipClass			: 'tip',		//element that triggers tooltip; also a selector to filter the descendants of the elements that trigger the events
-        tipContainerClass	: 'tooltip',	//element where the tooltip content is written
-        hiddenClass			: 'tooltipHidden',
-        rtl					: $('html').attr('dir') === 'rtl' ? true : false,
-        pageXOffsetMouse	: 20,	//vertical offset for mouse
-        pageYOffsetMouse	: 35,	//horizontal offset for mouse
-        pageXOffsetKeyboard : 10,	//vertical offset for keyboard
-        pageYOffsetKeyboard : 5		//horizontal offset for keyboard
+        wrapper             : '.content',   //parent element where the event handlers are bound
+        tipClass            : 'tip',        //element that triggers tooltip; also a selector to filter the descendants of the elements that trigger the events
+        tipContainerClass   : 'tooltip',    //element where the tooltip content is written
+        hiddenClass         : 'tooltipHidden',
+        rtl                 : $('html').attr('dir') === 'rtl' ? true : false,
+        pageXOffsetMouse    : 20,           //vertical offset for mouse
+        pageYOffsetMouse    : 35,           //horizontal offset for mouse
+        pageXOffsetKeyboard : 10,           //vertical offset for keyboard
+        pageYOffsetKeyboard : 5             //horizontal offset for keyboard
     };
 
 }(window, jQuery));
