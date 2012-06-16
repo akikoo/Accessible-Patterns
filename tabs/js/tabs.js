@@ -211,13 +211,13 @@
 
     // Plugin defaults
     $.fn.tabs.defaults = {
-        tabContainerClass:  'tabs',
-        tabIDprefix:        '-t',
-        tabListClass:       'tabList',
-        panelIDprefix:      '-p',
-        panelClass:         'tabPanel',
-        selClass:           'selected',
-        rtl:                $('html').attr('dir') === 'rtl' ? true : false
+        tabContainerClass   : 'tabs',
+        tabIDprefix         : '-t',
+        tabListClass        : 'tabList',
+        panelIDprefix       : '-p',
+        panelClass          : 'tabPanel',
+        selClass            : 'selected',
+        rtl                 : $('html').attr('dir') === 'rtl' ? true : false
     };
 
 }(window, jQuery));

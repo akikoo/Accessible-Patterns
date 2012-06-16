@@ -78,8 +78,8 @@
 
             //apply attrs and events to tooltipped element
             $obj
-                .removeAttr('title')				//remove redundant title attr
-                .attr('aria-describedby', ttID);	//associate tooltip with element for screenreaders
+                .removeAttr('title')                //remove redundant title attr
+                .attr('aria-describedby', ttID);    //associate tooltip with element for screenreaders
 
             //events
             $(opts.wrapper).on({
